@@ -8,13 +8,13 @@
 NAME = bsq
 
 FILES = main.c \
-	my_read.c
+	my_read.c \
+	my_check_square.c
 
 all :	$(NAME)
 
 $(NAME):
 	gcc -o $(NAME) $(FILES)
-#	gcc -o $(NAME) $(FILES) -Wall -Werror -Ofast
 
 clean:
 	rm -f *.o
@@ -46,4 +46,8 @@ debug:
 	gcc -o $(NAME) $(FILES) -Wall -Wextra
 
 valgrind:
+	clear;
 	gcc -g3 -o $(NAME) $(FILES)
+
+test:	fclean
+	gcc -o test criterions.c --coverage -lcriterion

@@ -7,7 +7,7 @@
 #include "include/my_read.h"
 #include "include/main.h"
 
-i8_t *my_find_biggest_square(uint2_t *array, i8_t len, i8_t x)
+static i8_t *my_find_biggest_square(uint2_t *array, i8_t len, i8_t x)
 {
     uint2_t *array_end = array + len;
     uint2_t *array_begin = array;
@@ -21,7 +21,7 @@ i8_t *my_find_biggest_square(uint2_t *array, i8_t len, i8_t x)
     return (rect);
 }
 
-long int my_getnbr_raws(int fd)
+static long int my_getnbr_raws(int fd)
 {
     long int v = 0;
     char c[1];
@@ -36,7 +36,7 @@ long int my_getnbr_raws(int fd)
     return (v);
 }
 
-unsigned short *my_convert_input(unsigned char *str, long int len)
+static unsigned short *my_convert_input(unsigned char *str, long int len)
 {
     uint2_t *convert = malloc(sizeof(uint2_t) * 256);
     int i = -1;
@@ -57,7 +57,7 @@ unsigned short *my_convert_input(unsigned char *str, long int len)
     return (array);
 }
 
-void my_write_square(long int *rect_data, char *str, i8_t col)
+static void my_write_square(long int *rect_data, char *str, i8_t col)
 {
     str += rect_data[0];
     long int i = -1;

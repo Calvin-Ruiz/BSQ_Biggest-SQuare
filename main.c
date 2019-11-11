@@ -25,21 +25,22 @@ static long int my_getnbr_raws(int fd)
     return (v);
 }
 
-static unsigned short *my_convert_input(unsigned char *str, long int len)
+static uint2_t *my_convert_input(unsigned char *str, long int len)
 {
     uint2_t *convert = malloc(sizeof(uint2_t) * 256);
-    int i = -1;
-    unsigned short *array = malloc(sizeof(short) * len);
+    long int i = -1;
+    uint2_t *array = malloc(sizeof(uint2_t) * len);
 
-    if (array == NULL)
+    if (array == NULL || convert == NULL)
         return (NULL);
     while (++i < 256)
-        convert[i] = 1;
+        convert[i] = 2;
     convert['.'] = 0;
+    convert['\n'] = 1;
+    convert['o'] = 1;
     i = -1;
-    while (++i < len) {
+    while (++i < len)
         array[i] = convert[str[i]];
-    }
     free(convert);
     i = len;
     while (i-- > 0)
@@ -65,6 +66,7 @@ static int my_find_and_put_bsq(char *str, long int len, long int i)
 {
     uint2_t *array = my_convert_input((unsigned char *)str, len);
     long int *rect = my_find_biggest_square(array, len, i);
+
     if (rect == NULL)
         return (84);
     my_write_square(rect, str, i);

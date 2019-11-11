@@ -9,7 +9,7 @@ NAME = bsq
 
 FILES = main.c \
 	my_read.c \
-	my_check_square.c
+	my_find_biggest_square.c
 
 all :	$(NAME)
 
@@ -49,5 +49,7 @@ valgrind:
 	clear;
 	gcc -g3 -o $(NAME) $(FILES)
 
-test:	fclean
-	gcc -o test criterions.c --coverage -lcriterion
+test:	all
+	gcc -o check tester.c my_read.c
+	./build_test.sh
+	rm check

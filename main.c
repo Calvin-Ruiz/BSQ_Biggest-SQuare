@@ -95,7 +95,10 @@ int main(int nargs, char **args)
         return (84);
     long int i = -1;
     while (++i < len && str[i] != '\n');
-    if (len != ++i * nb_raws)
+    long int j = i;
+    while (j < len && str[i] == '\n')
+        j += i;
+    if (len != ++i * nb_raws && j == len)
         return (84);
     int exit_mode = my_find_and_put_bsq(str, len, i);
     return (exit_mode);

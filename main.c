@@ -25,58 +25,19 @@ static long int my_getnbr_raws(int fd)
     return (v);
 }
 
-static uint2_t *my_convert_input(unsigned char *str, long int len, uint2_t *chk)
+static int my_checker(long int i, long int len, long int nb_raws, char *str)
 {
-    uint2_t *convert = malloc(sizeof(uint2_t) * 256);
-    long int i = -1;
-    uint2_t *array = malloc(sizeof(uint2_t) * len);
-    if (array == NULL || convert == NULL)
-        return (NULL);
-    while (++i < 256)
-        convert[i] = 2;
-    convert['.'] = 0;
-    convert['\n'] = 1;
-    convert['o'] = 1;
-    i = -1;
-    while (++i < len) {
-        array[i] = convert[str[i]];
-        *chk = *chk | array[i];
-    }
-    free(convert);
-    i = len;
-    while (i-- > 0)
-        array[i] = array[i] ? 0 : array[i + 1] + 1;
-    return (array);
-}
+    long int j = i - 1;
 
-static void my_write_square(long *rect_data, char *str, i8_t col)
-{
-    str += rect_data[0];
-    long int i = -1;
-    long int j = -1;
-
-    while (++i < rect_data[1]) {
-        j = -1;
-        while (++j < rect_data[1])
-            str[j] = 'x';
-        str += col;
-    }
-}
-
-static int my_find_and_put_bsq(char *str, long int len, long int i)
-{
-    unsigned short check = 0;
-    uint2_t *array = my_convert_input((unsigned char *)str, len, &check);
-    long int *rect = my_find_biggest_square(array, len, i);
-
-    if (rect == NULL || (check & 2)) {
-        free(str);
+    while (j < len && str[j] == '\n')
+        j += i;
+    if (len != i-- * nb_raws || j < len)
         return (84);
-    }
-    my_write_square(rect, str, i);
-    write(1, str, len);
-    free(str);
-    free(rect);
+    j = 1;
+    while (++i < len)
+        j += str[i] == '\n';
+    if (j != nb_raws)
+        return (84);
     return (0);
 }
 
@@ -95,10 +56,7 @@ int main(int nargs, char **args)
         return (84);
     long int i = -1;
     while (++i < len && str[i] != '\n');
-    long int j = i;
-    while (j < len && str[i] == '\n')
-        j += i;
-    if (len != ++i * nb_raws && j == len)
+    if (my_checker(++i, len, nb_raws, str))
         return (84);
     int exit_mode = my_find_and_put_bsq(str, len, i);
     return (exit_mode);

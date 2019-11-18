@@ -9,7 +9,7 @@ NAME = bsq
 
 FILES = main.c \
 	my_read.c \
-	my_find_biggest_square.c
+	my_find_and_put_bsq.c
 
 all :	$(NAME)
 
@@ -49,7 +49,7 @@ valgrind:
 	clear;
 	gcc -g3 -o $(NAME) $(FILES)
 
-test:	all
+test:	re
 	gcc -o check tester.c my_read.c
 	./build_test.sh
 	rm check

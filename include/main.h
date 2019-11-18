@@ -11,6 +11,6 @@
 typedef unsigned short uint2_t;
 typedef long int i8_t;
 
-i8_t *my_find_biggest_square(uint2_t *array, i8_t len, i8_t x);
+int my_find_and_put_bsq(char *str, long int len, long int i);
 
 #endif /* MAIN_H_ */

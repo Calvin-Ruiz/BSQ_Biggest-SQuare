@@ -15,13 +15,13 @@ static uint2_t *my_convert_input(unsigned char *str, long int len, uint2_t *chk)
     if (array == NULL || convert == NULL)
         return (NULL);
     while (++i < 256)
-	convert[i] = 2;
+        convert[i] = 2;
     convert['.'] = 0;
     convert['\n'] = 1;
     convert['o'] = 1;
     i = -1;
     while (++i < len) {
-	array[i] = convert[str[i]];
+        array[i] = convert[str[i]];
         *chk = *chk | array[i];
     }
     free(convert);

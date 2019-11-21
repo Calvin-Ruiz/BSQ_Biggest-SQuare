@@ -48,7 +48,3 @@ debug:
 valgrind:
 	clear;
 	gcc -g3 -o $(NAME) $(FILES)
-
-test:
-	./build_test.sh
-

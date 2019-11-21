@@ -69,8 +69,10 @@ static i8_t *my_find_biggest_square(uint2_t *array, i8_t len, i8_t x)
     uint2_t *array_begin = array;
     i8_t *rect = malloc(sizeof(i8_t) * 2);
 
-    if (rect == NULL)
+    if (rect == NULL) {
+        free(array);
         return (NULL);
+    }
     rect[0] = 0;
     rect[1] = 0;
     while (array < (array_end - rect[1] * x))

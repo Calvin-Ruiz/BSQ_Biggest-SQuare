@@ -56,8 +56,10 @@ int main(int nargs, char **args)
         return (84);
     long int i = -1;
     while (++i < len && str[i] != '\n');
-    if (my_checker(++i, len, nb_raws, str))
+    if (my_checker(++i, len, nb_raws, str)) {
+        free(str);
         return (84);
+    }
     int exit_mode = my_find_and_put_bsq(str, len, i);
     return (exit_mode);
 }

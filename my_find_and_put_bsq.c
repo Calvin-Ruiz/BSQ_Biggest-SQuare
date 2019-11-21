@@ -6,6 +6,7 @@
 */
 #include "include/main.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static uint2_t *my_convert_input(unsigned char *str, long int len, uint2_t *chk)
 {

@@ -10,7 +10,6 @@ static strchain_t *my_reader(const int port, long *full, char *buff, int size)
 {
     strchain_t *temp;
     strchain_t *chain;
-
     chain = malloc(sizeof(*chain));
     if (chain == NULL)
         return (NULL);
@@ -18,6 +17,8 @@ static strchain_t *my_reader(const int port, long *full, char *buff, int size)
     chain->data = buff;
     while (size == DATALEN) {
         buff = malloc(DATALEN);
+        if (buff == NULL)
+            return (NULL);
         size = read(port, buff, DATALEN);
         temp->next = malloc(sizeof(*temp));
         if (temp->next == NULL)

@@ -14,7 +14,7 @@ FILES = main.c \
 all :	$(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(FILES)
+	gcc -O3 -o $(NAME) $(FILES)
 
 clean:
 	rm -f *.o
@@ -49,7 +49,6 @@ valgrind:
 	clear;
 	gcc -g3 -o $(NAME) $(FILES)
 
-test:	re
-	gcc -o check tester.c my_read.c
+test:
 	./build_test.sh
-	rm check
+

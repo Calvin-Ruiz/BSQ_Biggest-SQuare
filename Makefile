@@ -14,7 +14,7 @@ FILES = main.c \
 all :	$(NAME)
 
 $(NAME):
-	gcc -O3 -o $(NAME) $(FILES)
+	gcc -o $(NAME) $(FILES)
 
 clean:
 	rm -f *.o
